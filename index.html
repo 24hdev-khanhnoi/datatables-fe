@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataTable by Khánh Nòi</title>
+    <link href="http://khanhnoi.mobie.in/ico/khanh-noi.ico" sizes="128x128" rel="shortcut icon" type="image/x-icon" />
+    <link href="http://khanhnoi.mobie.in/ico/khanh-noi.ico" sizes="128x128" rel="shortcut icon" />
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+
+    <div class="wrappterTable">
+        <div class="head">
+            <label for="cars">Show :</label>
+            <select name="show" id="showId">
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+              </select>
+            <span>entris</span>
+        </div>>
+        <table id="table_id" class="display">
+            <thead>
+                <tr>
+                    <th key='name' id="nameId">
+                        <p>Name
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 0 48 48" width="48"><path d="M14.83 30.83l9.17-9.17 9.17 9.17 2.83-2.83-12-12-12 12z"/><path d="M0 0h48v48h-48z" fill="none"/></svg>
+                            </span>
+                        </p>
+                    </th>
+                    <th key='position' id="positionId">
+                        <p>Position
+                            <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 0 48 48" width="48"><path d="M14.83 30.83l9.17-9.17 9.17 9.17 2.83-2.83-12-12-12 12z"/><path d="M0 0h48v48h-48z" fill="none"/></svg>
+                        </span>
+                        </p>
+                    </th>
+                    <th key='office' id="officeId">
+                        <p>Office
+                            <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 0 48 48" width="48"><path d="M14.83 30.83l9.17-9.17 9.17 9.17 2.83-2.83-12-12-12 12z"/><path d="M0 0h48v48h-48z" fill="none"/></svg>
+                        </span>
+                        </p>
+                    </th>
+                    <th key='age' id="ageId">
+                        <p>Age
+                            <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 0 48 48" width="48"><path d="M14.83 30.83l9.17-9.17 9.17 9.17 2.83-2.83-12-12-12 12z"/><path d="M0 0h48v48h-48z" fill="none"/></svg>
+                        </span>
+                        </p>
+                    </th>
+                    <th key='startDate' id="startDateId">
+                        <p>Start date
+                            <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="48" viewBox="0 0 48 48" width="48"><path d="M14.83 30.83l9.17-9.17 9.17 9.17 2.83-2.83-12-12-12 12z"/><path d="M0 0h48v48h-48z" fill="none"/></svg>
+                        </span>
+                        </p>
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="bodyTableId">
+                <!-- <tr>
+                <td>Row 1 Data 1</td>
+                <td>Row 1 Data 2</td>
+                <td>Row 1 Data 3</td>
+                <td>Row 1 Data 4</td>
+                <td>Row 1 Data 5</td>
+
+            </tr> -->
+
+
+            </tbody>
+        </table>
+    </div>
+
+    <script type="text/javascript" charset="utf8" src="data.js"></script>
+    <script type="text/javascript" charset="utf8" src="main.js"></script>
+
+</body>
+
+</html>
