@@ -3,7 +3,7 @@ const mockData = [
     id: 1,
     name: "Lalo",
     position: "Web Developer I",
-    position: "Yanguan",
+    office: "Yanguan",
     age: 72,
     startDate: "8/28/2020",
   },

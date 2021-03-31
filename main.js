@@ -4,9 +4,11 @@ console.log("1".localeCompare("2"));
 console.log("------TABLE---------");
 //elm
 let selectShowElm = document.querySelector("#showId");
+let paginationElm = document.querySelector("#paginationId");
 let bodyTableElm = document.querySelector("#bodyTableId");
 let nameElm = document.querySelector("#nameId");
 let trElms = document.querySelectorAll("table tr th");
+
 //end elm
 
 //varibale
@@ -57,16 +59,21 @@ const fetchData = new Promise((resolve, reject) => {
 });
 
 const renderTable = (data, options, first) => {
-  let { show, sort } = options;
+  let { show, page } = options;
   if (first) {
+    let { sort } = options;
     console.log("first");
     changeUiSortTable(sort);
     sortData(sort);
+    renderPagination(show, page);
   }
   // console.log(show);
   show = show < data.length ? show : data.length;
+  let start = (page - 1) * show;
+  let end = start + show;
+  console.log(start, end);
   let htmlText = "";
-  for (let i = 0; i < show; i++) {
+  for (let i = start; i < end; i++) {
     htmlText += `
     <tr key=${data[i].id}>
                  <td>${data[i].name}</td>
@@ -177,6 +184,28 @@ const compareDate = (date1, date2) => {
   return result;
 };
 
+const renderPagination = (show, page) => {
+  let htmtPrevious = `<a class="${
+    page == 1 ? "disable" : ""
+  }" onclick="handlePagination('previous')" href="#" id='previousId'>Previous</a>`;
+  let htmtNext = `<a class="${
+    page == Math.ceil(data.length / show) ? "disable" : ""
+  }" onclick="handlePagination('next') href="#" id='nextId'>Next</a>`;
+  let max = Math.ceil(data.length / show);
+  let htmlPagination = "";
+  for (let i = 0; i < max; i++) {
+    htmlPagination += `<a onclick="handlePagination(${
+      i + 1
+    })" href="#" class="${i == page - 1 ? "selected" : ""}">${i + 1}</a>`;
+  }
+  paginationElm.innerHTML = htmtPrevious + htmlPagination + htmtNext;
+};
+
+const handlePagination = (page) => {
+  console.log(page);
+  // if(page = 'next')
+};
+
 //usage:
 
 // fetchData.then((data) => {
@@ -208,6 +237,7 @@ selectShowElm.addEventListener("change", (e) => {
   console.log("-newShow ", newShow);
   options = { ...options, show: newShow };
   renderTable(data, options);
+  renderPagination(newShow, options.page);
 });
 
 trElms.forEach((elm) => {

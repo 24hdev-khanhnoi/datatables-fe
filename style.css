@@ -16,6 +16,42 @@ body {
 
 .head {
     color: #fff;
+    display: flex;
+}
+
+.wrapperSelect {
+    margin-right: 1em;
+}
+
+.pagination {
+    /* color: #fff; */
+}
+
+.pagination a {
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 10px;
+    border: thin solid #fff;
+    transition: 0.2s;
+    margin: 0 2px;
+}
+
+.pagination a:hover {
+    color: #009;
+    background: #fff;
+}
+
+.pagination a.selected {
+    background: #ac521e;
+    border: thin solid #fff;
+    color: aqua;
+    cursor: default;
+    pointer-events: none;
+}
+
+.disable {
+    opacity: 0.5;
+    pointer-events: none;
 }
 
 table,
