@@ -74,6 +74,7 @@ const renderTable = (data, options, first) => {
   let start = (page - 1) * show;
   let end = start + show < data.length ? start + show : data.length;
   console.log(start + "->" + end);
+  // if (start == 0 && end == 0) return;
   let htmlText = "";
   for (let i = start; i < end; i++) {
     htmlText += `
@@ -190,12 +191,15 @@ const renderPagination = (show, page) => {
   const next = 0;
   const pre = -1;
   //many func handlePagination
+  console.log({ page });
   let htmtPrevious = `<a class="${
     page == 1 ? "disable" : ""
   }" onclick="handlePagination(${pre})" href="#" >Previous</a>`;
 
   let htmtNext = `<a class="${
-    page == Math.ceil(data.length / show) ? "disable" : ""
+    page == Math.ceil(data.length / show) || (page == 1 && data.length < show)
+      ? "disable"
+      : ""
   }" onclick="handlePagination(${next})" href="#" >Next</a>`;
 
   let max = Math.ceil(data.length / show);
