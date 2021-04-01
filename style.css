@@ -17,6 +17,8 @@ body {
 .head {
     color: #fff;
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .wrapperSelect {
@@ -34,6 +36,7 @@ body {
     border: thin solid #fff;
     transition: 0.2s;
     margin: 0 2px;
+    cursor: pointer;
 }
 
 .pagination a:hover {
@@ -52,6 +55,15 @@ body {
 .disable {
     opacity: 0.5;
     pointer-events: none;
+}
+
+.search {
+    margin-left: auto;
+}
+
+.search input {
+    height: 32px;
+    width: 200px;
 }
 
 table,

@@ -65,13 +65,14 @@ const renderTable = (data, options, first) => {
     console.log("first");
     changeUiSortTable(sort);
     sortData(sort);
-    renderPagination(show, page);
+    // renderPagination(show, page);
   }
   // console.log(show);
+  renderPagination(show, page);
   show = show < data.length ? show : data.length;
   let start = (page - 1) * show;
-  let end = start + show;
-  console.log(start, end);
+  let end = start + show < data.length ? start + show : data.length;
+  console.log(start + "->" + end);
   let htmlText = "";
   for (let i = start; i < end; i++) {
     htmlText += `
@@ -185,12 +186,17 @@ const compareDate = (date1, date2) => {
 };
 
 const renderPagination = (show, page) => {
+  const next = 0;
+  const pre = -1;
+  //many func handlePagination
   let htmtPrevious = `<a class="${
     page == 1 ? "disable" : ""
-  }" onclick="handlePagination('previous')" href="#" id='previousId'>Previous</a>`;
+  }" onclick="handlePagination(${pre})" href="#" >Previous</a>`;
+
   let htmtNext = `<a class="${
     page == Math.ceil(data.length / show) ? "disable" : ""
-  }" onclick="handlePagination('next') href="#" id='nextId'>Next</a>`;
+  }" onclick="handlePagination(${next})" href="#" >Next</a>`;
+
   let max = Math.ceil(data.length / show);
   let htmlPagination = "";
   for (let i = 0; i < max; i++) {
@@ -201,9 +207,19 @@ const renderPagination = (show, page) => {
   paginationElm.innerHTML = htmtPrevious + htmlPagination + htmtNext;
 };
 
-const handlePagination = (page) => {
-  console.log(page);
-  // if(page = 'next')
+const handlePagination = (newPageClick) => {
+  // console.log(newPageClick );
+  let newPage = newPageClick;
+  newPage =
+    newPage == 0 || newPage == "next"
+      ? options.page + 1
+      : newPage == -1 || newPage == "previous"
+      ? options.page - 1
+      : newPage;
+  // console.log(options);
+  options = { ...options, page: newPage };
+  console.log(options);
+  renderTable(data, options);
 };
 
 //usage:
@@ -235,7 +251,7 @@ window.onload = renderTable(data, options, true);
 selectShowElm.addEventListener("change", (e) => {
   let newShow = e.target.value;
   console.log("-newShow ", newShow);
-  options = { ...options, show: newShow };
+  options = { ...options, show: newShow, page: 1 };
   renderTable(data, options);
   renderPagination(newShow, options.page);
 });
