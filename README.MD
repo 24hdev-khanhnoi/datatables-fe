@@ -1,7 +1,7 @@
 ## BAI 2 - TABLE
 
 - Trang mẫu: https://datatables.net/
-- Trang demo: Chưa có
+- Trang demo: https://datatables.netlify.app/
 
 # Report
 
