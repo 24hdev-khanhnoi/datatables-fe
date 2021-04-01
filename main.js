@@ -3,6 +3,7 @@ console.log("1".localeCompare("2"));
 
 console.log("------TABLE---------");
 //elm
+const showDescriptionElm = document.querySelector("#descriptionId");
 const selectShowElm = document.querySelector("#showId");
 const paginationElm = document.querySelector("#paginationId");
 const bodyTableElm = document.querySelector("#bodyTableId");
@@ -74,6 +75,7 @@ const renderTable = (data, options, first) => {
   let start = (page - 1) * show;
   let end = start + show < data.length ? start + show : data.length;
   console.log(start + "->" + end);
+  showingDescripton(start, end);
   // if (start == 0 && end == 0) return;
   let htmlText = "";
   for (let i = start; i < end; i++) {
@@ -225,6 +227,14 @@ const handlePagination = (newPageClick) => {
   options = { ...options, page: newPage };
   console.log(options);
   renderTable(data, options);
+};
+
+const showingDescripton = (start, end) => {
+  showDescriptionElm.innerHTML = `Showing ${start} to  ${end} of  ${
+    data.length
+  } entries. <br> ${
+    data.length < mockData.length ? "( filtered from 57 total entries)" : ""
+  } `;
 };
 
 //usage:

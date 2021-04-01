@@ -62,6 +62,10 @@ h1 {
     pointer-events: none;
 }
 
+.description {
+    margin-left: 1em;
+}
+
 .search {
     margin-left: auto;
 }
