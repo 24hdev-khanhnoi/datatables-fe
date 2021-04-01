@@ -293,7 +293,7 @@ searchInputElm.addEventListener("input", inputHandler);
 searchInputElm.addEventListener("propertychange", inputHandler); // for IE8
 
 const changeData = (value) => {
-  options = { ...options, search: value };
+  options = { ...options, search: value, page: 1 };
   console.log(options);
   if (value == "") {
     data = [...mockData];
