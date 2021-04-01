@@ -66,6 +66,10 @@ body {
     width: 200px;
 }
 
+.search input:focus {
+    outline: none;
+}
+
 table,
 th,
 td {

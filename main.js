@@ -3,17 +3,18 @@ console.log("1".localeCompare("2"));
 
 console.log("------TABLE---------");
 //elm
-let selectShowElm = document.querySelector("#showId");
-let paginationElm = document.querySelector("#paginationId");
-let bodyTableElm = document.querySelector("#bodyTableId");
-let nameElm = document.querySelector("#nameId");
-let trElms = document.querySelectorAll("table tr th");
+const selectShowElm = document.querySelector("#showId");
+const paginationElm = document.querySelector("#paginationId");
+const bodyTableElm = document.querySelector("#bodyTableId");
+const nameElm = document.querySelector("#nameId");
+const trElms = document.querySelectorAll("table tr th");
+const searchInputElm = document.querySelector("#searchId");
 
 //end elm
 
 //varibale
 let data = [];
-data = mockData;
+data = [...mockData];
 let defaultOptions = {
   show: 10,
   search: "",
@@ -24,6 +25,8 @@ let defaultOptions = {
   },
 };
 let options = { ...defaultOptions };
+let timer,
+  searchValue = "";
 //End varibale
 
 // console.log(data);
@@ -59,14 +62,12 @@ const fetchData = new Promise((resolve, reject) => {
 });
 
 const renderTable = (data, options, first) => {
-  let { show, page } = options;
+  let { show, page, sort } = options;
   if (first) {
-    let { sort } = options;
     console.log("first");
     changeUiSortTable(sort);
-    sortData(sort);
-    // renderPagination(show, page);
   }
+  sortData(sort);
   // console.log(show);
   renderPagination(show, page);
   show = show < data.length ? show : data.length;
@@ -165,18 +166,18 @@ const compareDate = (date1, date2) => {
   // console.log(result);
   result =
     result == 0
-      ? _date1[0] - _date2[0] == 0
+      ? _date1[1] - _date2[1] == 0
         ? 0
-        : _date1[0] - _date2[0] > 0
+        : _date1[1] - _date2[1] > 0
         ? 1
         : -1
       : result;
   // console.log(result);
   result =
     result == 0
-      ? _date1[1] - _date2[1] == 0
+      ? _date1[0] - _date2[0] == 0
         ? 0
-        : _date1[1] - _date2[1] > 0
+        : _date1[0] - _date2[0] > 0
         ? 1
         : -1
       : result;
@@ -250,8 +251,9 @@ window.onload = renderTable(data, options, true);
 
 selectShowElm.addEventListener("change", (e) => {
   let newShow = e.target.value;
-  console.log("-newShow ", newShow);
+  // console.log("-newShow ", newShow);
   options = { ...options, show: newShow, page: 1 };
+  console.log(options);
   renderTable(data, options);
   renderPagination(newShow, options.page);
 });
@@ -275,5 +277,45 @@ trElms.forEach((elm) => {
     renderTable(data, options);
   });
 });
+
+// searchInputElm.addEventListener("change", (e) => {
+//   console.log(e);
+// });
+
+const inputHandler = function (e) {
+  // performance
+  clearTimeout(timer);
+  timer = setTimeout(() => {
+    changeData(e.target.value);
+  }, 500);
+};
+searchInputElm.addEventListener("input", inputHandler);
+searchInputElm.addEventListener("propertychange", inputHandler); // for IE8
+
+const changeData = (value) => {
+  options = { ...options, search: value };
+  console.log(options);
+  if (value == "") {
+    data = [...mockData];
+    renderTable(mockData, options);
+    return;
+  }
+  value = value.toLowerCase();
+  check = false;
+
+  data = mockData.filter((item) => {
+    check = false;
+    check = item["name"].toLowerCase().includes(value);
+    check = check ? check : item["position"].toLowerCase().includes(value);
+    check = check ? check : item["office"].toLowerCase().includes(value);
+    check = check ? check : String(item["age"]).includes(value);
+    check = check ? check : item["startDate"].toLowerCase().includes(value);
+    // console.log(check);
+    if (check) return item;
+  });
+
+  // console.log({ newData: data });
+  renderTable(data, options);
+};
 
 //End event
