@@ -129,6 +129,11 @@ path {
     min-height: 500px !important;
 } */
 
+.asc,
+.desc {
+    background-color: rgb(66, 65, 65);
+}
+
 .asc span {
     position: relative;
     /* display: inline-block; */

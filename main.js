@@ -1,5 +1,5 @@
-console.log("2".localeCompare("1"));
-console.log("1".localeCompare("2"));
+// console.log("2".localeCompare("1"));
+// console.log("1".localeCompare("2"));
 
 console.log("------TABLE---------");
 //elm
@@ -16,7 +16,7 @@ const searchInputElm = document.querySelector("#searchId");
 //varibale
 let data = [];
 data = [...mockData];
-let defaultOptions = {
+const defaultOptions = {
   show: 10,
   search: "",
   page: 1,
@@ -296,6 +296,7 @@ trElms.forEach((elm) => {
 //   console.log(e);
 // });
 
+//search
 const inputHandler = function (e) {
   // performance
   clearTimeout(timer);
@@ -331,5 +332,7 @@ const changeData = (value) => {
   // console.log({ newData: data });
   renderTable(data, options);
 };
+
+//End search
 
 //End event
